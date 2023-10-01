@@ -5,6 +5,7 @@
     <title> 21015644d_Drink Ordering System </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="./script/order.js"></script>
 </head>
 
 <body>
@@ -34,14 +35,14 @@
     </nav>
 
     <div class="container-fluid  py-4">
-        <form class="#" action="#" method="post">
+        <form class="#" action="#" id="order-form"  method="post">
             <div class="row p-3">
                 <Label for="inputName" class="form-label" >Name:</Label>
                 <input  class="form-control" id="inputName" type="text">
             </div>
             <div class="row p-3">
                 <label for="selectDrink">Drink:</label>
-                <select class="form-select" id="selectDrink">
+                <select class="form-select" id="selectDrink" onchange="calculatePrice()">
                     <option selected>Please select</option>
                     <option value="bubble-milktea">Bubble Milktea</option>
                     <option value="iced-latte">Iced Latte</option>
@@ -52,45 +53,45 @@
                 <div class="col d-flex d-lg-block">
                     <label>Size:</label>
                     <div class="mb-2 ms-2 ms-lg-0">
-                        <input type="radio" class="btn-check" name="size" id="sizeSmall" autocomplete="off">
+                        <input type="radio" class="btn-check" name="size" id="sizeSmall" value="small" onchange="calculatePrice()" autocomplete="off">
                         <label class="btn btn-outline-success my-1" for="sizeSmall">Small</label>
                     </div>
                     <div class="mb-2 ms-2 ms-lg-0">
-                        <input type="radio" class="btn-check" name="size" id="sizeMedium" autocomplete="off">
+                        <input type="radio" class="btn-check" name="size" id="sizeMedium" value="medium" onchange="calculatePrice()" autocomplete="off">
                         <label class="btn btn-outline-success my-1" for="sizeMedium">Medium</label>
                     </div>
                     <div class="mb-2 ms-2 ms-lg-0">
-                        <input type="radio" class="btn-check" name="size" id="sizeLarge" autocomplete="off">
+                        <input type="radio" class="btn-check" name="size" id="sizeLarge" value="large" onchange="calculatePrice()" autocomplete="off">
                         <label class="btn btn-outline-success my-1" for="sizeLarge">Large</label>
                     </div>
                 </div>
                 <div class="col d-flex d-lg-block"> 
                     <label>Ice:</label>
                     <div class="mb-2 ms-2 ms-lg-0">
-                        <input type="radio" class="btn-check" name="ice" id="iceNormal" autocomplete="off">
+                        <input type="radio" class="btn-check" name="ice" id="iceNormal" value="Normal" autocomplete="off">
                         <label class="btn btn-outline-success my-1" for="iceNormal">Normal</label>
                     </div>
                     <div class="mb-2 ms-2 ms-lg-0">
-                        <input type="radio" class="btn-check" name="ice" id="iceLess" autocomplete="off">
+                        <input type="radio" class="btn-check" name="ice" id="iceLess" value="Less" autocomplete="off">
                         <label class="btn btn-outline-success my-1" for="iceLess">Less</label>
                     </div>
                     <div class="mb-2 ms-2 ms-lg-0">
-                        <input type="radio" class="btn-check" name="ice" id="iceNone" autocomplete="off">
-                        <label class="btn btn-outline-success my-1" for="iceNone">Without Cce</label>
+                        <input type="radio" class="btn-check" name="ice" id="iceNone" value="Without Ice" autocomplete="off">
+                        <label class="btn btn-outline-success my-1" for="iceNone">Without Ice</label>
                     </div>
                 </div>
                 <div class="col d-flex d-lg-block"> 
                     <label>Sweetness:</label>
                     <div class="mb-2 ms-2 ms-lg-0">
-                        <input type="radio" class="btn-check" name="sweetness" id="sweetness100" autocomplete="off">
+                        <input type="radio" class="btn-check" name="sweetness" id="sweetness100" value="100" autocomplete="off">
                         <label class="btn btn-outline-success my-1" for="sweetness100">100 %</label>
                     </div>
                     <div class="mb-2 ms-2 ms-lg-0">
-                        <input type="radio" class="btn-check" name="sweetness" id="sweetness50" autocomplete="off">
+                        <input type="radio" class="btn-check" name="sweetness" id="sweetness50" value="50" autocomplete="off">
                         <label class="btn btn-outline-success my-1" for="sweetness50">50 %</label>
                     </div>
                     <div class="mb-2 ms-2 ms-lg-0">
-                        <input type="radio" class="btn-check" name="sweetness" id="sweetness0" autocomplete="off">
+                        <input type="radio" class="btn-check" name="sweetness" id="sweetness0" value="0" autocomplete="off">
                         <label class="btn btn-outline-success my-1" for="sweetness0">0 %</label>
                     </div>
                 </div>
@@ -98,8 +99,8 @@
             <div class="row p-3">
                 <p class="fs-4 fw-bolder">Price: $<span id="price">0</span></p>
             </div>
-            <button class="btn btn-success" type="submit">Place order</button>
-            <button class="btn btn-warning" type="reset">Reset</button>
+            <button class="btn btn-success" type="button" onclick="placeOrder(event)">Place order</button>
+            <button class="btn btn-warning" type="button" onclick="resetUI()">Reset</button>
         </form>
     </div>
         
